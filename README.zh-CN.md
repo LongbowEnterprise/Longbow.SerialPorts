@@ -85,10 +85,9 @@ await client.CloseAsync();
 
 ## 🔗 相关链接
 
-- [Gitee 项目主页](https://gitee.com/LongbowEnterprise/Longbow.SerialPorts?wt.mc_id=DT-MVP-5004174)
 - [Github 项目主页](https://github.com/LongbowEnterprise/Longbow.SerialPorts?wt.mc_id=DT-MVP-5004174)
 - [NuGet 包](https://www.nuget.org/packages/Longbow.SerialPorts?wt.mc_id=DT-MVP-5004174)
 
 ## 📞 联系方式
 
-如需联系开发者，请查看项目主页或提交问题到 [Gitee Issues](https://gitee.com/LongbowEnterprise/Longbow.SerialPorts/issues?wt.mc_id=DT-MVP-5004174) 或者 [Github Issues](https://github.com/LongbowEnterprise/Longbow.SerialPorts/issues?wt.mc_id=DT-MVP-5004174)。
+如需联系开发者，请查看项目主页或提交问题到 [Github Issues](https://github.com/LongbowEnterprise/Longbow.SerialPorts/issues?wt.mc_id=DT-MVP-5004174)。
