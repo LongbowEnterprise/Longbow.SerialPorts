@@ -5,7 +5,7 @@
 namespace Longbow.SerialPorts;
 
 /// <summary>
-/// 串口通讯提供者接口
+/// 串口通讯接口
 /// </summary>
 public interface ISerialPortClient : IAsyncDisposable
 {

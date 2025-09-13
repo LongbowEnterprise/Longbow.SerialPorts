@@ -9,7 +9,7 @@ using System.Runtime.Versioning;
 namespace Microsoft.Extensions.DependencyInjection;
 
 /// <summary>
-/// ITcpSocketFactory 扩展方法
+/// ISerialPortFactory 扩展方法
 /// </summary>
 [UnsupportedOSPlatform("browser")]
 public static class ServiceCollectionExtensions

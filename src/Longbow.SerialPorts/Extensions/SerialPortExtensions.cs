@@ -12,7 +12,7 @@ static class SerialPortExtensions
     {
         if (port == null || port.IsOpen == false)
         {
-            throw new InvalidOperationException("端口未打开，请调用 OpenAsync 方法打开端口");
+            throw new InvalidOperationException("The port is not open. Please call the OpenAsync method to open the port; 端口未打开，请调用 OpenAsync 方法打开端口");
         }
     }
 }
