@@ -19,7 +19,11 @@
     <PackageReadmeFile>readme.md</PackageReadmeFile>
     <PackageReleaseNotes></PackageReleaseNotes>
   </PropertyGroup>
-
+  
+  <ItemGroup>
+    <None Include="readme.md" Pack="true" PackagePath="" />
+  </ItemGroup>
+  
   <PropertyGroup>
     <TargetFrameworks>net6.0;net7.0;net8.0;net9.0</TargetFrameworks>
     <NET8Version>8.0.*</NET8Version>
