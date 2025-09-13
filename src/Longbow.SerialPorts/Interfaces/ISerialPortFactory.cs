@@ -5,7 +5,7 @@
 namespace Longbow.SerialPorts;
 
 /// <summary>
-/// ITcpSocketFactory Interface
+/// ISerialPortFactory Interface
 /// </summary>
 public interface ISerialPortFactory : IAsyncDisposable
 {
