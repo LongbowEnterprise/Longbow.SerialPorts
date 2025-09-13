@@ -7,7 +7,7 @@ namespace Longbow.SerialPorts;
 /// <summary>
 /// 串口通讯提供者接口
 /// </summary>
-public interface ISerialPortProvider : IAsyncDisposable
+public interface ISerialPortClient : IAsyncDisposable
 {
     /// <summary>
     /// 获得 端口是否打开
@@ -18,7 +18,7 @@ public interface ISerialPortProvider : IAsyncDisposable
     /// 打开端口方法
     /// </summary>
     /// <returns></returns>
-    ValueTask<bool> OpenAsync(SerialPortOptions? options = null, CancellationToken token = default);
+    ValueTask<bool> OpenAsync(CancellationToken token = default);
 
     /// <summary>
     /// 发送数据方法
