@@ -8,7 +8,7 @@ using System.IO.Ports;
 
 namespace Longbow.SerialPorts;
 
-class DefaultSerialPortProvider : ISerialPortProvider
+class DefaultSerialPortClient(SerialPortOptions options) : ISerialPortClient
 {
     [NotNull]
     private SerialPort? _serialPort = null;
@@ -18,9 +18,8 @@ class DefaultSerialPortProvider : ISerialPortProvider
 
     public bool IsOpen => _serialPort?.IsOpen ?? false;
 
-    public async ValueTask<bool> OpenAsync(SerialPortOptions? options = null, CancellationToken token = default)
+    public async ValueTask<bool> OpenAsync(CancellationToken token = default)
     {
-        options ??= new SerialPortOptions();
         _serialPort ??= new(options.PortName, options.BaudRate, options.Parity, options.DataBits, options.StopBits);
         _serialPort.RtsEnable = options.RtsEnable;
         _serialPort.DtrEnable = options.DtrEnable;
