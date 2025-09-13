@@ -11,7 +11,6 @@ namespace Microsoft.Extensions.DependencyInjection;
 /// <summary>
 /// ISerialPortFactory 扩展方法
 /// </summary>
-[UnsupportedOSPlatform("browser")]
 public static class ServiceCollectionExtensions
 {
     /// <summary>
