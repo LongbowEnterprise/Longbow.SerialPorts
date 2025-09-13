@@ -9,7 +9,7 @@ using System.Runtime.Versioning;
 namespace Microsoft.Extensions.DependencyInjection;
 
 /// <summary>
-/// TcpSocket 扩展方法
+/// ITcpSocketFactory 扩展方法
 /// </summary>
 [UnsupportedOSPlatform("browser")]
 public static class ServiceCollectionExtensions
@@ -19,10 +19,11 @@ public static class ServiceCollectionExtensions
     /// </summary>
     /// <param name="services"></param>
     /// <returns></returns>
-    public static IServiceCollection AddSerialPortService(this IServiceCollection services)
+    [UnsupportedOSPlatform("browser")]
+    public static IServiceCollection AddSerialPortFactory(this IServiceCollection services)
     {
-        // 增加 IPortProvider 服务
-        services.TryAddTransient<ISerialPortProvider, DefaultSerialPortProvider>();
+        // 添加 ISerialPortsFactory 服务
+        services.TryAddSingleton<ISerialPortFactory, DefaultSerialPortFactory>();
 
         return services;
     }
