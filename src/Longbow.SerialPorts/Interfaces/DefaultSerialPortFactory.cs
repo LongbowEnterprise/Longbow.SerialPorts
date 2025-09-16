@@ -10,15 +10,16 @@ sealed class DefaultSerialPortFactory : ISerialPortFactory
 {
     private readonly ConcurrentDictionary<string, ISerialPortClient> _pool = new();
 
-    public ISerialPortClient GetOrCreate(string? name = null, Action<SerialPortOptions>? valueFactory = null)
-    {
-        return string.IsNullOrEmpty(name) ? CreateClient(valueFactory) : _pool.GetOrAdd(name, key => CreateClient(valueFactory));
-    }
+    public ISerialPortClient GetOrCreate(string name, Action<SerialPortOptions>? configureOptions = null) => string.IsNullOrEmpty(name)
+        ? CreateClient(configureOptions)
+        : _pool.GetOrAdd(name, key => CreateClient(configureOptions));
 
-    private static DefaultSerialPortClient CreateClient(Action<SerialPortOptions>? valueFactory = null)
+    public ISerialPortClient GetOrCreate(Action<SerialPortOptions>? configureOptions = null) => CreateClient(configureOptions);
+
+    private static DefaultSerialPortClient CreateClient(Action<SerialPortOptions>? configureOptions = null)
     {
         var options = new SerialPortOptions();
-        valueFactory?.Invoke(options);
+        configureOptions?.Invoke(options);
         return new DefaultSerialPortClient(options);
     }
 

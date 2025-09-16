@@ -13,9 +13,16 @@ public interface ISerialPortFactory : IAsyncDisposable
     /// 生成 <see cref="ISerialPortClient"/> 实例方法
     /// </summary>
     /// <param name="name"></param>
-    /// <param name="valueFactory"></param>
+    /// <param name="configureOptions"></param>
     /// <returns></returns>
-    ISerialPortClient GetOrCreate(string? name = null, Action<SerialPortOptions>? valueFactory = null);
+    ISerialPortClient GetOrCreate(string name, Action<SerialPortOptions>? configureOptions = null);
+
+    /// <summary>
+    /// 生成 <see cref="ISerialPortClient"/> 实例方法
+    /// </summary>
+    /// <param name="configureOptions"></param>
+    /// <returns></returns>
+    ISerialPortClient GetOrCreate(Action<SerialPortOptions>? configureOptions = null);
 
     /// <summary>
     /// 移除指定名称 <see cref="ISerialPortClient"/> 实例方法
