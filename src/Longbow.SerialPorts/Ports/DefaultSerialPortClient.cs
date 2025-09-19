@@ -2,35 +2,39 @@
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 // Website: https://github.com/LongbowExtensions/
 
-using Longbow.Modbus;
+using Microsoft.Extensions.Options;
 using System.Buffers;
 using System.IO.Ports;
 
 namespace Longbow.SerialPorts;
 
-class DefaultSerialPortClient(SerialPortOptions options) : ISerialPortClient
+class DefaultSerialPortClient(IOptions<SerialPortOptions> options) : ISerialPortClient
 {
     [NotNull]
     private SerialPort? _serialPort = null;
     private TaskCompletionSource _readTaskCompletionSource = new();
     private CancellationTokenSource _receiveCancellationTokenSource = new();
     private Memory<byte> _buffer = Memory<byte>.Empty;
+    private readonly SerialPortOptions _options = options.Value.CopyTo();
 
     public bool IsOpen => _serialPort?.IsOpen ?? false;
 
+    public SerialPortOptions Options => _options;
+
+
     public async ValueTask<bool> OpenAsync(CancellationToken token = default)
     {
-        _serialPort ??= new(options.PortName, options.BaudRate, options.Parity, options.DataBits, options.StopBits);
-        _serialPort.RtsEnable = options.RtsEnable;
-        _serialPort.DtrEnable = options.DtrEnable;
+        _serialPort ??= new(Options.PortName, Options.BaudRate, Options.Parity, Options.DataBits, Options.StopBits);
+        _serialPort.RtsEnable = Options.RtsEnable;
+        _serialPort.DtrEnable = Options.DtrEnable;
 
-        _serialPort.Handshake = options.Handshake;
-        _serialPort.DiscardNull = options.DiscardNull;
-        _serialPort.ReadBufferSize = options.ReadBufferSize;
-        _serialPort.WriteBufferSize = options.WriteBufferSize;
+        _serialPort.Handshake = Options.Handshake;
+        _serialPort.DiscardNull = Options.DiscardNull;
+        _serialPort.ReadBufferSize = Options.ReadBufferSize;
+        _serialPort.WriteBufferSize = Options.WriteBufferSize;
 
-        _serialPort.ReadTimeout = options.ReadTimeout;
-        _serialPort.WriteTimeout = options.WriteTimeout;
+        _serialPort.ReadTimeout = Options.ReadTimeout;
+        _serialPort.WriteTimeout = Options.WriteTimeout;
 
         _serialPort.DataReceived += DataReceived;
         _serialPort.ErrorReceived += ErrorReceived;

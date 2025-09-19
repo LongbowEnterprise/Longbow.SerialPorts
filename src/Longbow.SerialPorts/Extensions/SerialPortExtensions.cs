@@ -4,7 +4,7 @@
 
 using System.IO.Ports;
 
-namespace Longbow.Modbus;
+namespace Longbow.SerialPorts;
 
 static class SerialPortExtensions
 {

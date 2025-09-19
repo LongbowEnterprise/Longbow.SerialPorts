@@ -15,6 +15,11 @@ public interface ISerialPortClient : IAsyncDisposable
     bool IsOpen { get; }
 
     /// <summary>
+    /// 获得 当前配置 <see cref="SerialPortOptions"/> 实例
+    /// </summary>
+    SerialPortOptions Options { get; }
+
+    /// <summary>
     /// 打开端口方法
     /// </summary>
     /// <returns></returns>

@@ -2,11 +2,12 @@
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 // Website: https://github.com/LongbowExtensions/
 
+using Microsoft.Extensions.DependencyInjection;
 using System.Collections.Concurrent;
 
 namespace Longbow.SerialPorts;
 
-sealed class DefaultSerialPortFactory : ISerialPortFactory
+sealed class DefaultSerialPortFactory(IServiceProvider provider) : ISerialPortFactory
 {
     private readonly ConcurrentDictionary<string, ISerialPortClient> _pool = new();
 
@@ -16,11 +17,12 @@ sealed class DefaultSerialPortFactory : ISerialPortFactory
 
     public ISerialPortClient GetOrCreate(Action<SerialPortOptions>? configureOptions = null) => CreateClient(configureOptions);
 
-    private static DefaultSerialPortClient CreateClient(Action<SerialPortOptions>? configureOptions = null)
+    private ISerialPortClient CreateClient(Action<SerialPortOptions>? configureOptions = null)
     {
-        var options = new SerialPortOptions();
-        configureOptions?.Invoke(options);
-        return new DefaultSerialPortClient(options);
+        var client = provider.GetRequiredService<ISerialPortClient>();
+        configureOptions?.Invoke(client.Options);
+
+        return client;
     }
 
     public ISerialPortClient? Remove(string name)
